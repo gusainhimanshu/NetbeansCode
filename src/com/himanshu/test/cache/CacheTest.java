@@ -24,8 +24,19 @@ public class CacheTest {
     }
     private void init(int ttl, int maxEntries)
   {
+      
     System.out.println("Initializing InMem Cache with : ttl=" + ttl + " Minutes" + " MaxEntries=" + maxEntries);
-
+  /*Using the from spec for using the command from a commandline or from a config spec*/  
+    /*String spec = "maximumSize=10000,expireAfterWrite=10m";
+    
+    Cache myCache = CacheBuilder.newBuilder().from(spec).removalListener(new RemovalListener<String, String>(){
+        public void onRemoval(RemovalNotification<String, String> rem)
+        {
+        System.out.println("Removed token as it has met ttl: " + (String)rem.getKey());
+      }
+    }).build();
+    */
+   /*Using the expireAfterWrite and maximumSize method*/ 
     Cache myCache = CacheBuilder.newBuilder().expireAfterWrite(30, TimeUnit.SECONDS).maximumSize(maxEntries).removalListener(new RemovalListener<String, String>()
     {
       public void onRemoval(RemovalNotification<String, String> rem)
